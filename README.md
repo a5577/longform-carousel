@@ -6,6 +6,22 @@
 
 A Codex skill that turns one topic into a full RED (Xiaohongshu) long-form carousel: cover + body pages + ready-to-post copy.
 
+## 成品展示
+
+三篇跑出来的完整成品，8 张图横向拼成一张拼版（4 列 × 2 行，页面都是 1440×2400 原始尺寸，点开看原图）：
+
+**求职 · 央国企面试**：2849 字，封面（深色／白底／纸底三版）+ 7 张正文页，深色内页。
+
+![](assets/showcase/央国企面试-拼版.jpg)
+
+**情感 · 跟对象吵完架**：2822 字，封面（深色／纸底两版）+ 7 张正文页，深色内页。
+
+![](assets/showcase/对象吵架-拼版.jpg)
+
+**生活 · 带爸妈出门**：2446 字，封面（深色／纸底两版）+ 6 张正文页，浅色内页。
+
+![](assets/showcase/带爸妈出门-拼版.jpg)
+
 ## 它做什么
 
 - **先查证再写**：每个数字、政策、案例都要能回到出处，写进笔记目录的 `来源.md`；查不到的删掉，不改成模糊说法。
@@ -29,6 +45,7 @@ scripts/
 assets/fonts/         Noto Sans SC / Noto Serif SC（OFL）
 assets/banner.png     README 顶部这张横幅
 assets/make_banner.py 用任意一套渲染好的页面重新生成横幅
+assets/showcase/      「成品展示」里那三张成品拼版
 examples/带爸妈出门/   一份可以直接跑的示例（素材 + 笔记.json + 插画 + 来源）
 ```
 
