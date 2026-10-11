@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# 系统
+.DS_Store
+Thumbs.db
+
+# 跑脚本时生成的产物（正常情况下它们在「笔记目录」里，不在本仓库）
+pages/
+封面候选/
+交付/
+全套预览.jpg
+渲染报告.json
+校验报告.json

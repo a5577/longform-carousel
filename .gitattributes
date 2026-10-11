@@ -1,0 +1,8 @@
+# 文本文件统一用 LF，避免 Windows/macOS 之间来回换行
+* text=auto eol=lf
+
+# 字体按二进制处理
+*.ttf binary
+*.otf binary
+*.png binary
+*.jpg binary
