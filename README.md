@@ -28,6 +28,7 @@ scripts/
 assets/fonts/         Noto Sans SC / Noto Serif SC（OFL）
 assets/banner.png     README 顶部这张横幅
 assets/make_banner.py 用任意一套渲染好的页面重新生成横幅
+examples/带爸妈出门/   一份可以直接跑的示例（笔记.json + 插画 + 来源）
 ```
 
 ## 配置
@@ -109,6 +110,23 @@ python scripts/package.py --note <笔记目录> --accept-visual "逐页看过，
 ### 7. agents/openai.yaml（可选）
 
 `agents/openai.yaml` 里是技能在界面上的显示名、简介和默认提示词。想改名或换默认提示词就改这三个字段；不需要就直接删掉这个文件，技能照常工作。
+
+## 示例
+
+仓库里带了一份能直接跑的示例：`examples/带爸妈出门/`（生活 / 旅行题材，1809 字，5 页正文，封面出深色／纸底／白底三版）。
+
+```bash
+python scripts/render.py examples/带爸妈出门
+python scripts/check.py  examples/带爸妈出门
+```
+
+里面的 `make_cover.py` 负责画封面插画——黄昏小站、长椅上的背影、旁边的行李箱。插画是**代码画出来的**，没有素材授权问题，谁 clone 下来都能重跑出一模一样的图；想换成自己拍的照片或用 `$imagegen` 生成的图，把 `cover.png` 替掉就行。
+
+README 顶部那张横幅同样是这套示例生成的：
+
+```bash
+python assets/make_banner.py examples/带爸妈出门/pages -o assets/banner.png
+```
 
 ## 字数与页数
 
