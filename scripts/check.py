@@ -269,6 +269,7 @@ def main(argv=None) -> int:
     rhythm = rhythm_note(spec.get("正文", ""))
     if rhythm:
         notes.append(rhythm)
+    source_checks(spec, base, errors, notes)
     cover_notes(spec, notes)
     publish = publish_checks(spec, base, notes)
 
@@ -500,6 +501,27 @@ def rhythm_note(body: str) -> str | None:
         return (f"正文 {len(lens)} 段，字数都在 {min(lens)}-{max(lens)} 之间、长度几乎一样，"
                 "读起来像模板；把最长的段拆开，或让某一段只写两三句")
     return None
+
+
+def source_checks(spec: dict, base: Path, errors: list[str], notes: list[str]) -> None:
+    """用户给了经历就不能编：正文里的数字都要能在 素材.md 里找到。"""
+    name = str(spec.get("素材") or "").strip()
+    if not name:
+        return
+    p = base / name
+    if not p.exists():
+        errors.append(f"笔记.json 里写了 素材: {name}，但笔记目录里没有这个文件（原文要原样留着）")
+        return
+    text = p.read_text(encoding="utf-8", errors="ignore")
+    if not text.strip():
+        notes.append(f"{name} 是空的，正文没法对照素材核一遍")
+        return
+    body = str(spec.get("正文") or "")
+    missing = sorted({n for n in re.findall(r"[0-9][0-9.]*", body) if n not in text})
+    if missing:
+        notes.append("正文里的这些数字在 " + name + " 里找不到，确认不是编的："
+                     + "、".join(missing[:10])
+                     + ("…" if len(missing) > 10 else ""))
 
 
 def cover_notes(spec: dict, notes: list[str]) -> None:
