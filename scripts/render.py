@@ -615,6 +615,7 @@ def resolve_body_style(cfg: dict | None, theme: dict) -> tuple[str, dict]:
     st["图案"] = pat if pat in BODY_PATTERNS else "无"
     st["图案密度"] = float(cfg.get("图案密度", 0.5))
     st["图案大小"] = float(cfg.get("图案大小", 0))
+    st["图案间距"] = float(cfg.get("图案间距", 0))   # 直接给像素间距，覆盖 密度 的换算
     st["图案透明度"] = float(cfg.get("图案透明度", cfg.get("图案不透明度", 0.3)))
     st["图案随机"] = int(cfg.get("图案随机", 11))
     st["版本"] = name
@@ -702,16 +703,17 @@ def draw_bg_pattern(img: Image.Image, st: dict) -> None:
     rgb = rgba(st.get("图案色", "#FFFFFF"))
     color = (*rgb, int(round(255 * alpha)))
     size = st.get("图案大小") or _lerp(48, 74, density)   # 越密图案越小
-    spacing = _lerp(600, 380, density)
+    spacing = st.get("图案间距") or _lerp(600, 380, density)
     stroke = max(2, int(round(size * 0.075)))
     step = int(round(spacing))
     jitter = spacing * 0.34
     rnd = random.Random(st.get("图案随机", 11))
-    layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    cw, ch = img.size
+    layer = Image.new("RGBA", (cw, ch), (0, 0, 0, 0))
     d = ImageDraw.Draw(layer)
     keep = 0.40 + density * 0.42      # 再随机跳掉一部分，保证「一点点」
-    cols = int(W / step) + 2
-    rows = int(H / step) + 2
+    cols = int(cw / step) + 2
+    rows = int(ch / step) + 2
     for row in range(rows):
         for c in range(cols):
             if rnd.random() > keep:

@@ -1,3 +1,5 @@
+![longform-carousel：把一段真实经历做成一整套小红书长文图文](assets/banner.png)
+
 # longform-carousel
 
 把一段真实经历或一篇长文，做成一整套小红书长文图文：**封面 + N 张正文页（1440×2400）**，外加可直接发布的**题目、3 段文案、话题标签、首评**。
@@ -24,6 +26,8 @@ scripts/
   check.py            自检：尺寸、墨迹边界、分页、配色、字数、AI 腔、发布件
   package.py          打包成可直接用的交付目录
 assets/fonts/         Noto Sans SC / Noto Serif SC（OFL）
+assets/banner.png     README 顶部这张横幅
+assets/make_banner.py 用任意一套渲染好的页面重新生成横幅
 ```
 
 ## 配置
